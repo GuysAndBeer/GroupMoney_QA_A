@@ -7,9 +7,9 @@ using OpenQA.Selenium;
 
 namespace GroupMoney_QA_A.ComponentHelper
 {
-    public class LinkHelper
+    public class ButtonHelper
     {
-        public static void ClickTheLink(By by)
+        public static void ClickTheButton(By by)
         {
             GenericHelper.GetWebElement(by).Click();
         }

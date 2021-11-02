@@ -7,11 +7,11 @@ using OpenQA.Selenium;
 
 namespace GroupMoney_QA_A.ComponentHelper
 {
-    public class LinkHelper
+    public class LabelHelper
     {
-        public static void ClickTheLink(By by)
+        public static bool IsTextEquals(By by, string text)
         {
-            GenericHelper.GetWebElement(by).Click();
+            return GenericHelper.GetWebElement(by).Text.Equals(text);
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenQA.Selenium.Support.Extensions;
 
 namespace GroupMoney_QA_A.ComponentHelper
 {
@@ -27,6 +28,18 @@ namespace GroupMoney_QA_A.ComponentHelper
             if(IsElementPresented(by))
                 return ObjectRepository.WebDriver.FindElement(by);
             throw new NoSuchElementException("No such element: " + by.ToString());
+        }
+
+        public static void TakeScreenShot(string filename = "Screen")
+        {
+            Screenshot screenshot = ObjectRepository.WebDriver.TakeScreenshot();
+            if (filename.Equals("Screen"))
+            {
+                screenshot.SaveAsFile(filename + DateTime.Now.ToString("yyyy-MM-dd-mm-ss") + ".jpeg", 
+                    ScreenshotImageFormat.Jpeg); 
+                return;
+            }
+            screenshot.SaveAsFile(filename, ScreenshotImageFormat.Jpeg);
         }
     }
 }
