@@ -30,5 +30,15 @@ namespace GroupMoney_QA_A.Configuration
         {
             return ConfigurationManager.AppSettings.Get(AppConfigKeys.WebSite);
         }
+
+        public double GetPageLoadTimeout()
+        {
+            return Convert.ToDouble(ConfigurationManager.AppSettings.Get(AppConfigKeys.PageLoadTimeout));
+        }
+
+        public double GetImplicitlyWait()
+        {
+            return Convert.ToDouble(ConfigurationManager.AppSettings.Get(AppConfigKeys.ImplicitlyWait));
+        }
     }
 }

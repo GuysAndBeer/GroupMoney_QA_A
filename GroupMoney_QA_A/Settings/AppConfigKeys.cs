@@ -12,5 +12,7 @@ namespace GroupMoney_QA_A.Settings
         public const string Username = "Username";
         public const string Password = "Password";
         public const string WebSite = "WebSite";
+        public const string PageLoadTimeout = "PageLoadTimeout";
+        public const string ImplicitlyWait = "ImplicitlyWait";
     }
 }
