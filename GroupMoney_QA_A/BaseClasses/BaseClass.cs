@@ -11,16 +11,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TechTalk.SpecFlow;
 
 namespace GroupMoney_QA_A.BaseClasses
 {
-    [TestClass]
+    [Binding]
     class BaseClass
     {
         private static ChromeOptions GetChromeOptions()
         {
             ChromeOptions options = new ChromeOptions();
             options.AddArgument("start-maximized");
+            options.BrowserVersion = "96.0.4664.45";
             return options;
         }
 
@@ -34,7 +36,9 @@ namespace GroupMoney_QA_A.BaseClasses
 
         private static IWebDriver GetChromeDriver()
         {
-            return new ChromeDriver(GetChromeOptions());
+            return new ChromeDriver(
+                "D:\\GroupMoneyMain\\GuysAndBeer\\GroupMoney_QA_A\\GroupMoney_QA_A\\bin\\Debug\\chromedriver_win32",
+                GetChromeOptions());
         }
 
         private static IWebDriver GetIExplorerDriver()
@@ -42,7 +46,7 @@ namespace GroupMoney_QA_A.BaseClasses
             return new InternetExplorerDriver(GetIExplorerOptions());
         }
 
-        [AssemblyInitialize]
+        [BeforeTestRun]
         public static void InitDriver(TestContext context)
         {
             ObjectRepository.Configuration = new AppConfigReader();
@@ -57,10 +61,15 @@ namespace GroupMoney_QA_A.BaseClasses
                 default:
                     throw new NoSuitableDriverFound("Driver not found: " + ObjectRepository.Configuration.GetWebDriver());
             }
-            NavigationHelper.NavigateToUrl("");
+            ObjectRepository.WebDriver.Manage().Timeouts().PageLoad = 
+                TimeSpan.FromSeconds(ObjectRepository.Configuration.GetPageLoadTimeout());
+            ObjectRepository.WebDriver.Manage().Timeouts().ImplicitWait =
+                TimeSpan.FromSeconds(ObjectRepository.Configuration.GetImplicitlyWait());
+            BrowserHelper.BrowserMaximize();
+            NavigationHelper.NavigateToUrl();
         }
 
-        [AssemblyCleanup]
+        [AfterTestRun]
         public static void CleanupDriver()
         {
             if (ObjectRepository.WebDriver != null)

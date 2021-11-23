@@ -13,5 +13,7 @@ namespace GroupMoney_QA_A.Interfaces
         string GetUsername();
         string GetPassword();
         string GetWebSite();
+        double GetPageLoadTimeout();
+        double GetImplicitlyWait();
     }
 }
